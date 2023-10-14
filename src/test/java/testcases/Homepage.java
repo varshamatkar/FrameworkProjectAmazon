@@ -12,6 +12,7 @@ import resources.BaseClass;
 public class Homepage extends BaseClass {
 	@Test
 	public void handleHomePage() throws IOException, InterruptedException {
+		
 		driverInitialize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 		driver.get("https://www.amazon.com/");

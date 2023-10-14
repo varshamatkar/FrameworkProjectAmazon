@@ -56,12 +56,13 @@ public class CellPhoneAndAccessories extends BaseClass {
     	  
     	 String name =obj2.getProductName().get(i).getText();
     	
-    	 // String price =obj2.getProductPrice().get(i).getText();
+    	//  String price =obj2.getProductPrice().get(i).getText();
     	 
     	 XSSFRow row = sheet.createRow(i+1);
      	
          row.createCell(0).setCellValue(name);
          
+       
          //row.createCell(1).setCellValue(price);
        
         

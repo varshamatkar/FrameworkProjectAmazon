@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
@@ -16,6 +17,8 @@ public class BaseClass {
 	
 	public void driverInitialize() throws IOException {
 	
+		
+	
 	FileInputStream file= new FileInputStream("C:\\Users\\matka\\CorejJava\\FrameworkDesign\\src\\main\\java\\resources\\data.properties");
 
 	Properties p=new Properties();
@@ -25,8 +28,10 @@ public class BaseClass {
 	String browserName=	p.getProperty("browser");
 	
 	if(browserName.equalsIgnoreCase("chrome")) {
+		 ChromeOptions options = new ChromeOptions();
+         options.addArguments("--incognito");
+         driver = new ChromeDriver(options);
 		
-	 driver=new ChromeDriver();
 	}
 	
 	else if(browserName.equalsIgnoreCase("Edge")) {
