@@ -12,12 +12,13 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import pageObjectModel.CellPhoneAndAccessoriesObjects;
+import pageObjectModel.ResultPageProductsObjects;
 import pageObjectModel.HomePageObjects;
-import pageObjectModel.VerifySelectedProductObjects;
+import pageObjectModel.VerifyDetailedProductObjects;
+
 import resources.BaseClass;
 
-public class VerifySelectedProduct extends BaseClass{
+public class VerifyDetailedProduct extends BaseClass{
 	@Test
 	public void  verifyProduct() throws IOException, InterruptedException{
 		
@@ -32,35 +33,48 @@ public class VerifySelectedProduct extends BaseClass{
 
 		HomePageObjects homePage=new HomePageObjects(driver);
 		
-		homePage.clickAll().click();;
+		homePage.clickAll().click();
+		Thread.sleep(2000);
 		homePage.clickElectronics().click();
+		Thread.sleep(5000);
 	
 		homePage.clickCellPhoneAccessories().sendKeys(Keys.ENTER);
 		Thread.sleep(2000);
 		
-		VerifySelectedProductObjects obj=new VerifySelectedProductObjects(driver);
-	
 		
 		//resultpageProductname and resultpageProductPrice store in string
-		String resultPageProductName=obj.getProductNameResultPage().getText();
-		String resultPageProductPrice=obj.getproductPriceResultPage().getText();
+		
+        ResultPageProductsObjects resultProducts=new ResultPageProductsObjects(driver);
+		
+		
+		String resultPageProductName=resultProducts.getProductName().get(3).getText();
+		String resultPageProductPrice=resultProducts.getProductPrice().get(3).getText();
 		System.out.println("ResultPage Product Name: "+resultPageProductName);
 		System.out.println("Result page product Price: "+resultPageProductPrice);
 		Thread.sleep(5000);
-
+		
+		
 		//click on fourth product
-		CellPhoneAndAccessoriesObjects cellPhoneandAcc=new CellPhoneAndAccessoriesObjects(driver);
+		ResultPageProductsObjects cellPhoneandAcc=new ResultPageProductsObjects(driver);
 	
 		for(int i=0;i<cellPhoneandAcc.allProducts().size();i++) {
 		 cellPhoneandAcc.allProducts().get(3).click();
 	  };
 		
 		
-		//detailedPageProductName and price store in string
-		String detailPageProductName=obj.getProductTitleDetailsPage().getText();
-		String  detailPageProductPrice=obj.getProductPriceOnDetailsPage().getText();
-		System.out.println("Detail Page Product Name: "+detailPageProductName);
-		System.out.println("Detail page Product Price: "+detailPageProductPrice);
+		
+		
+		 VerifyDetailedProductObjects obj=new VerifyDetailedProductObjects(driver);
+			String detailPageProductName=obj.getProductTitleDetailsPage().getText();
+			String  detailPageProductPrice=obj.getProductPriceOnDetailsPage().getText();
+			System.out.println("Detail Page Product Name: "+detailPageProductName);
+			System.out.println("Detail page Product Price: "+detailPageProductPrice);
+	  
+		
+
+	
+		
+		
 		
 		// Verify the title of the product on the both the pages
 		if (resultPageProductName.equals(detailPageProductName)) {

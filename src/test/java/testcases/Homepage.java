@@ -14,12 +14,13 @@ public class Homepage extends BaseClass {
 	public void handleHomePage() throws IOException, InterruptedException {
 		
 		driverInitialize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("https://www.amazon.com/");
 		driver.manage().window().maximize();
 		
 	HomePageObjects obj=new HomePageObjects(driver);
 	obj.clickAll().click();
+	Thread.sleep(3000);
 	obj.clickElectronics().click();
 	Thread.sleep(3000);
 	obj.clickCellPhoneAccessories().sendKeys(Keys.ENTER);

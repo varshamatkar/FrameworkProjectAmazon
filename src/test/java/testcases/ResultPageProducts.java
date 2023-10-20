@@ -7,23 +7,25 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
-import pageObjectModel.CellPhoneAndAccessoriesObjects;
+import pageObjectModel.ResultPageProductsObjects;
 import pageObjectModel.HomePageObjects;
 import resources.BaseClass;
 
-public class CellPhoneAndAccessories extends BaseClass {
+public class ResultPageProducts extends BaseClass {
       @Test
 	public void cellPhoneAndAcceHandle() throws IOException, InterruptedException {
     	  
 	driverInitialize();
 	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
+	
 	driver.get("https://www.amazon.com/");
+	Thread.sleep(5000);
 	driver.manage().window().maximize();
 
 	HomePageObjects obj=new HomePageObjects(driver);
 	
-	obj.clickAll().click();;
+	obj.clickAll().click();
+	Thread.sleep(5000);
 	obj.clickElectronics().click();
 	Thread.sleep(3000);
 	obj.clickCellPhoneAccessories().sendKeys(Keys.ENTER);
@@ -43,7 +45,7 @@ public class CellPhoneAndAccessories extends BaseClass {
      headerRow.createCell(1).setCellValue("Product Price");
      headerRow.createCell(2).setCellValue("Best Seller");
     
-     CellPhoneAndAccessoriesObjects obj2=new CellPhoneAndAccessoriesObjects(driver);
+     ResultPageProductsObjects obj2=new ResultPageProductsObjects(driver);
      obj2.allProducts();
      
      //calculate total number of products
@@ -52,18 +54,18 @@ public class CellPhoneAndAccessories extends BaseClass {
       System.out.println("Total products found: " + totalProduct);
     
       
-        for(int i=0;i<obj2.allProducts().size();i++) {
+        for(int i=0;i<obj2.allProducts().size()-1;i++) {
     	  
     	 String name =obj2.getProductName().get(i).getText();
     	
-    	//  String price =obj2.getProductPrice().get(i).getText();
+    	  String price =obj2.getProductPrice().get(i).getText();
     	 
     	 XSSFRow row = sheet.createRow(i+1);
      	
          row.createCell(0).setCellValue(name);
          
        
-         //row.createCell(1).setCellValue(price);
+         row.createCell(1).setCellValue(price);
        
         
          if (obj2.allProducts().get(i).getText().contains("Best Seller")) {

@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class CellPhoneAndAccessoriesObjects {
+public class ResultPageProductsObjects {
 
 public static WebDriver driver;
 	
@@ -16,14 +16,14 @@ public static WebDriver driver;
 	
 	private By productName=By.xpath("//h2/a/span");
 	private By productPrice=By.xpath("//span[@class='a-price-whole']");
-	private By isBestSeller=By.xpath("//span[contains(text(), 'Best Seller')]");
+	
 	
 	
 	public List<WebElement> allProducts() {
 		return  driver.findElements(products);
 	}
 	
-	public CellPhoneAndAccessoriesObjects(WebDriver driver2) {
+	public ResultPageProductsObjects(WebDriver driver2) {
 		this.driver=driver2;
 	}
 	public List<WebElement> getProductName() {
@@ -36,11 +36,7 @@ public static WebDriver driver;
 		
 		
 	}
-	public List<WebElement> isBestSeller() {
-		return driver.findElements(isBestSeller);
-		
-		
-	}
+	
 	
 	
 }
